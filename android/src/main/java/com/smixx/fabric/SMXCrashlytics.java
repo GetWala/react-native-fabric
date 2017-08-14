@@ -101,6 +101,27 @@ public class SMXCrashlytics extends ReactContextBaseJavaModule {
         Crashlytics.logException(e);
     }
 
+    @ReactMethod
+    public void recordException(String exceptionName, String reason, ReadableMap errorData){
+        StackTraceElement[] stackTrace = new StackTraceElement[2];
+        String functionName = "", fileName = "", data = "";
+        if(errorData.getString("functionName") != null){
+            functionName = errorData.getString("functionName");
+        }
+        if(errorData.getString("fileName") != null){
+            fileName = errorData.getString("fileName");
+        }
+        if(errorData.getString("data") != null){
+            data = errorData.getString("data");
+        }
+        if(functionName.length() > 0 && fileName .length() > 0){
+            StackTraceElement stack = new StackTraceElement("", functionName, fileName, 0);
+            stackTrace[0] = stack;
+        }
+        Exception e = new Exception(exceptionName + "\n" + reason + "\n" + data);
+        Crashlytics.logException(e);
+    }
+
     private static Number parse(String str) {
         Number number = null;
 
