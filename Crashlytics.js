@@ -92,7 +92,7 @@ module.exports = {
   recordCustomExceptionName: function(name:string, reason:string, frameArray:Array<Object>) {
     SMXCrashlytics.recordCustomExceptionName(name, reason, frameArray);
   },
-  recordException: function(exceptionName, reason, errorData){
+  recordException: function(exceptionName:string, reason:string, errorData:Object){
     SMXCrashlytics.recordException(exceptionName, reason, errorData)
   }
 };
