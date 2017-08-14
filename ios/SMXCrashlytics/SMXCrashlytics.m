@@ -100,6 +100,14 @@ RCT_EXPORT_METHOD(recordCustomExceptionName:(nonnull NSString *)name reason:(NSS
   }
 }
 
+RCT_EXPORT_METHOD(recordException:(nonnull NSString *)name reason:(NSString *)reason frameArray:(nonnull NSArray *)frameArray)
+{
+  NSMutableArray *clsFrames = [[NSMutableArray alloc] init];
+  if(frameArray) {
+    [[Crashlytics sharedInstance] recordException:name reason:reason frameArray:clsFrames];
+  }
+}
+
 // These functions are borrowed from https://github.com/joecannatti/Objective-C-Koans
 BOOL KWObjCTypeIsFloatingPoint(const char *objCType) {
   return strcmp(objCType, @encode(float)) == 0 || strcmp(objCType, @encode(double)) == 0;
